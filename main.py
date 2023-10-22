@@ -1,11 +1,12 @@
 restaurants = []
-menus = []
+
+# [[nome, cnpj,endereço, telefone, tempo de entrega, [[arroz, 10], [pão, 2], [coca, 10]] ] ]
 from func import *
 
-
 opc = ''
+id = ''
 
-while opc != '0' :
+while opc != '0':
     
     opc = interface()
     #caso usuário escolha a opção 1 do menu
@@ -17,7 +18,7 @@ while opc != '0' :
         add_restaurant(restaurants)
         
     elif opc == '12':
-        print("Editar restaurante")
+        modify_restaurant(restaurants)
         
     elif opc == '13':
         remove_restaurant(restaurants)
@@ -26,17 +27,19 @@ while opc != '0' :
         add_item(restaurants)
         
     elif opc == '22':
-        print("Editar item do cardápio")
+        id = search_restaurant(restaurants)
+        
+        edit_item(restaurants, id)
         
     elif opc == '23':
-        print("Remover item do cardápio")
+        id = search_restaurant(restaurants)
+        remove_item(restaurants, id)
     
     elif opc == '31':
         show_list_restaurant(restaurants)
         
     elif opc == '32':
         show_describ_all_restaurant(restaurants)
-        
-    
+         
         
 print("\nSistema encerrado!")

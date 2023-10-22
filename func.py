@@ -1,11 +1,19 @@
 ##################### Restaurant func ###############
 def add_restaurant(restaurants:list):
+    """
+    Recebe uma lista de restaurantes como parâmetro e adiciona um novo restaurante a lista
+    
+    Restaurants: list
+    
+    return: None
+    
+    """
     print("\nPreencha as informações do restaurante!\n")
     name = input("Nome: ")
     cnpj = input("CNPJ: ")
     address = input("Endereço: ")
     phone = input("Telefone: ")
-    time = input("Tempo médio de entrega: ")
+    time = input("Tempo médio de entrega [Minutos]: ")
     menu = []
     
     restaurants.append([name,cnpj,address,phone, time,menu])
@@ -27,10 +35,21 @@ def search_restaurant(restaurants:list):
     return id
             
         
-def modify_restaurant():
-    pass
+def modify_restaurant(restaurants:list):
+    
+    id = search_restaurant(restaurants)
+    
+    if id != -1:
+        opc = input("\nQual campo deseja alterar?\n\t1 - Nome\n\t2 - CNPJ\n\t3 - Endereço\n\t4 - Telefone\n\t5 - Tempo médio de entrega\n\nSua escolha: ")
+        
+        if opc.isnumeric():
+            opc = int(opc)
+            
+            if opc > 0 and opc < 6:
+                data = input("\nInfome o novo valor para o respectivo campo: ")
+                restaurants[id][opc-1] = data
 
-def remove_restaurant(restaurants):
+def remove_restaurant(restaurants:list):
     id = search_restaurant(restaurants)
     
     if id != -1:
@@ -46,7 +65,7 @@ def show_menu(restaurants):
     
 #################### Menu func ##############
 
-def add_item(restaurants):
+def add_item(restaurants:list):
     id = search_restaurant(restaurants)
 
     
@@ -56,13 +75,42 @@ def add_item(restaurants):
         valor = input("Preço: ")
         
         restaurants[id][-1].append([name, valor])
+        
+def search_item(restaurants:list, id: int):
+    """
+    Recebe Id do restaurante
+    """
+    cont = 0
+    idx = -1
+    
+    if id != -1:
+        name = input("\nNome do produto: ")
+        
+        for item in restaurants[id][-1]:
+            if item[0] == name:
+                idx = cont
+                break
+            cont +=1
+            
+    return idx
 
+def edit_item(restaurants:list, id: int):
 
-def edit_item():
-    pass
+    idx = search_item(restaurants, id)
+    if idx != -1:
+        opc = input("\nQual Campo deseja alterar?\n\t1 - Nome\n\t2 - Preço\n\nSua escolha: ")
+        
+        if opc.isnumeric():
+            opc = int(opc)
+            if opc > 0  and opc < 3:
+                data = input("\nInfome o novo valor para o respectivo campo: ")
+                restaurants[id][-1][idx][opc-1] = data
+                
 
-def remove_item():
-    pass
+def remove_item(restaurants:list, id: int):
+    idx = search_item(restaurants, id)
+    if idx != -1:
+        del restaurants[id][-1][idx]
 
 ################## show info ################
 
@@ -81,8 +129,6 @@ def show_describ_all_restaurant(restaurants:list):
                 print(f"\n\t{item[0]} custando R$ {item[1]} ")
 
 ################ user interface #######
-
-
 
 #0
 def interface():  # funcao para a tela inicial do programa
@@ -122,7 +168,7 @@ def gestao_restaurantes():
     3 - Remover restaurante
     4 - Voltar para a tela inicial
     """))
-    
+     
     opc = input("\nOpção desejada: ")
         
     if opc == '1': # cada opçao escolhida encaminha para a respectiva funcao a ser criada
@@ -142,8 +188,7 @@ def gestao_restaurantes():
     return opc
     
 #2
-def gestao_cardapios():
-    
+def gestao_cardapios():    
     print(("""
     1 - Adicionar item ao cardápio
     2 - Editar item do cardápio
@@ -169,7 +214,6 @@ def gestao_cardapios():
         opc = '-1'
         
     return opc
-
 #3
 def apresentacao_de_informacoes():
 
@@ -190,3 +234,13 @@ def apresentacao_de_informacoes():
             opc = '4'
             
     return opc
+
+"""
+Sugestões de novas funcionalidades:
+    Procurar o produto mais barato e seu respectivo restaurante
+    Procurar o restaurante com o menor tempo de entrega
+    Organizar os produtos em categorias:
+        Comida
+        Bebida
+
+"""
