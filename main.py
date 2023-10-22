@@ -14,16 +14,16 @@ while opc != '0' :
         print("\nOpção invalida!\n")
     
     elif opc == '11':
-        print("Adicionar restaurante")
+        add_restaurant(restaurants)
         
     elif opc == '12':
         print("Editar restaurante")
         
     elif opc == '13':
-        print("Remover restaurante")
+        remove_restaurant(restaurants)
         
     elif opc == '21':
-        print("Adicionar item ao cardápio")
+        add_item(restaurants)
         
     elif opc == '22':
         print("Editar item do cardápio")
@@ -32,7 +32,10 @@ while opc != '0' :
         print("Remover item do cardápio")
     
     elif opc == '31':
-        print("Exibir lista de restaurantes")
+        show_list_restaurant(restaurants)
+        
+    elif opc == '32':
+        show_describ_all_restaurant(restaurants)
         
     
         
