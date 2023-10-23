@@ -1,7 +1,8 @@
 restaurants = []
-
 # [[nome, cnpj,endereço, telefone, tempo de entrega, [[arroz, 10], [pão, 2], [coca, 10]] ] ]
+
 from func import *
+
 
 opc = ''
 id = ''
