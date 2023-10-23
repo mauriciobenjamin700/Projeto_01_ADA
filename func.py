@@ -4,12 +4,15 @@ def add_restaurant(restaurants: list):
     """
     Função para adicionar um novo restaurante à lista de restaurantes.
     Recebe a lista de restaurantes e adiciona um novo restaurante.
+    
+    parametros:
+        restaurants: lista onde os restaraurantes serão armazenados
     """
     # Solicitando ao usuário as informações do novo restaurante
     print('\nPreencha as informações do restaurante!\n')
-    name = input('Nome: ')
+    name = input('Nome: ').upper()
     cnpj = input('CNPJ: ')
-    address = input('Endereço: ')
+    address = input('Endereço: ').upper()
     phone = input('Telefone: ')
     time = input('Tempo médio de entrega [Minutos]: ')
     menu = []
@@ -20,7 +23,11 @@ def add_restaurant(restaurants: list):
 def search_restaurant(restaurants: list):
     """
     Função que busca um restaurante pelo nome ou CNPJ.
-    Retorna o índice do restaurante na lista ou -1 se não for encontrado.
+    
+    Parâmetros:
+        restaurants: lista de restaurantes
+    Retorna:
+        o índice do restaurante na lista ou -1 se não for encontrado.
     """
     # Opções para o usuário escolher como quer buscar o restaurante
     opc = input('\nDeseja acessar por:\n\t1 - Nome do Restaurante\n\t2 - CNPJ do restaurante\n\nSua escolha: ')
@@ -28,9 +35,9 @@ def search_restaurant(restaurants: list):
 
     # Obtendo a chave de pesquisa (nome ou CNPJ) com base na escolha do usuário
     if opc == '1':
-        key = input('Nome do restaurante: ')
+        key = input('Nome do restaurante: ').upper()
     elif opc == '2':
-        key = input('CNPJ do restaurante: ')
+        key = input('CNPJ do restaurante: ').upper()
     
     # Continuando a busca do restaurante, a função retorna o índice do restaurante
     # ou -1 se não encontrá-lo na lista
@@ -100,7 +107,7 @@ def add_item(restaurants: list):
     if id != -1:
         # Solicitando ao usuário as informações do novo item
         print('\nInforme os dados do item: ')
-        name = input('Nome: ')
+        name = input('Nome: ').upper()
         valor = input('Preço: ')
         
         # Adicionando o novo item ao menu do restaurante
@@ -110,10 +117,12 @@ def search_item(restaurants: list, id: int):
     """
     Função para pesquisar um item no menu de um restaurante específico.
     
-    :param restaurants: Lista de todos os restaurantes.
-    :param id: Índice do restaurante em que se deseja buscar o item.
+    Parâmetros:
+        restaurants: Lista de todos os restaurantes.
+        id: Índice do restaurante em que se deseja buscar o item.
     
-    :return: Retorna o índice do item encontrado ou -1 se não encontrar.
+    return: 
+        idx: índice do item encontrado ou -1 se não encontrar.
     """
     cont = 0  # Inicializando um contador.
     idx = -1  # Inicializando o índice de retorno com -1 (item não encontrado).
@@ -121,7 +130,7 @@ def search_item(restaurants: list, id: int):
     # Verifica se o ID fornecido é válido
     if id != -1:
         # Solicita ao usuário o nome do produto que deseja buscar
-        name = input('\nNome do produto: ')
+        name = input('\nNome do produto: ').upper()
         
         # Procura o produto no menu do restaurante especificado
         for item in restaurants[id][-1]:
