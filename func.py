@@ -69,6 +69,14 @@ def modify_restaurant(restaurants: list):
                 # Solicitando ao usuário o novo valor para o campo escolhido
                 data = input('\nInfome o novo valor para o respectivo campo: ')
                 restaurants[id][opc-1] = data
+            
+            else:
+                print("\nOpção escolhida é invalida!")
+        
+        else:
+            print("\nOpção Invalida, insira apenas números!")        
+    else:
+        print("\nRestaurante não encontrado!")
 
 def remove_restaurant(restaurants: list):
     """
@@ -80,7 +88,9 @@ def remove_restaurant(restaurants: list):
     # Se o restaurante for encontrado, removendo-o da lista
     if id != -1:
         del restaurants[id]
-        
+    
+    else:
+        print("\nRestaurante não encontrado!")
 
 def show_menu(restaurants):
     """
@@ -93,6 +103,9 @@ def show_menu(restaurants):
     if id != -1:
         for item in restaurants[id][-1]:
             print(item)
+            
+    else:
+        print("\nRestaurante não encontrado!")
     
 #################### Menu func ##############
 
@@ -113,6 +126,9 @@ def add_item(restaurants: list):
         # Adicionando o novo item ao menu do restaurante
         restaurants[id][-1].append([name, valor])
 
+    else:
+        print("\nRestaurante não encontrado!")
+        
 def search_item(restaurants: list, id: int):
     """
     Função para pesquisar um item no menu de um restaurante específico.
@@ -138,6 +154,8 @@ def search_item(restaurants: list, id: int):
                 idx = cont  # Atribui o valor do contador ao índice de retorno
                 break
             cont += 1  # Incrementa o contador
+    
+    
             
     return idx
 
@@ -164,6 +182,13 @@ def edit_item(restaurants: list, id: int):
                 data = input('\nInfome o novo valor para o respectivo campo: ')
                 # Atualiza o valor do campo escolhido no item
                 restaurants[id][-1][idx][opc-1] = data
+            else:
+                print("\nOpção escolhida é invalida")
+        else:
+            print("\nInforme um valor númerico!")
+                
+    else:
+        print("\nRestaurante não encontrado!")
         
 def remove_item(restaurants: list, id: int):
     """
@@ -178,6 +203,9 @@ def remove_item(restaurants: list, id: int):
     # Se o item for encontrado, remove-o da lista
     if idx != -1:
         del restaurants[id][-1][idx]
+        
+    else:
+        print("\nRestaurante não encontrado!")
 
 ################## show info ################
 
@@ -188,14 +216,17 @@ def show_list_restaurant(restaurants: list):
     Args:
     restaurants (list): Lista contendo informações sobre cada restaurante.
     """
-    # Imprime o cabeçalho para a lista de restaurantes cadastrados.
-    print('\nRestaurantes Cadastrados: ')
+    if len(restaurants) > 0:
+        # Imprime o cabeçalho para a lista de restaurantes cadastrados.
+        print('\nRestaurantes Cadastrados: ')
+        
+        # Percorre cada restaurante na lista fornecida.
+        for restaurant in restaurants:
+            # Imprime os detalhes do restaurante de forma formatada.
+            print(f'\n\tNome: {restaurant[0]}\n\tCNPJ: {restaurant[1]}\n\tEndereço: {restaurant[2]}\n\tTelefone: {restaurant[3]}\n\tTempo médio para um entrega: {restaurant[4]}')
     
-    # Percorre cada restaurante na lista fornecida.
-    for restaurant in restaurants:
-        # Imprime os detalhes do restaurante de forma formatada.
-        print(f'\n\tNome: {restaurant[0]}\n\tCNPJ: {restaurant[1]}\n\tEndereço: {restaurant[2]}\n\tTelefone: {restaurant[3]}\n\tTempo médio para um entrega: {restaurant[4]}')
-
+    else:
+        print("\nNão há restaurantes cadastrados no sistema")
 def show_describ_all_restaurant(restaurants: list):
     """
     Exibe uma descrição detalhada de cada restaurante cadastrado, incluindo os itens do menu.
@@ -203,23 +234,26 @@ def show_describ_all_restaurant(restaurants: list):
     Args:
     restaurants (list): Lista contendo informações sobre cada restaurante.
     """
-    # Imprime o cabeçalho para a lista de restaurantes cadastrados.
-    print('\nRestaurantes Cadastrados: ')
-    
-    # Percorre cada restaurante na lista fornecida.
-    for restaurant in restaurants:
-        # Imprime os detalhes do restaurante de forma formatada.
-        print(f'\n\tNome: {restaurant[0]}\n\tCNPJ: {restaurant[1]}\n\tEndereço: {restaurant[2]}\n\tTelefone: {restaurant[3]}\n\tTempo médio para um entrega: {restaurant[4]}\n')
+    if len(restaurants) > 0:
+        # Imprime o cabeçalho para a lista de restaurantes cadastrados.
+        print('\nRestaurantes Cadastrados: ')
         
-        # Verifica se o restaurante possui itens no menu.
-        if len(restaurant[-1])>0:
-            # Imprime o cabeçalho para a lista de produtos disponíveis do restaurante.
-            print('Produtos Disponiveis: ')
+        # Percorre cada restaurante na lista fornecida.
+        for restaurant in restaurants:
+            # Imprime os detalhes do restaurante de forma formatada.
+            print(f'\n\tNome: {restaurant[0]}\n\tCNPJ: {restaurant[1]}\n\tEndereço: {restaurant[2]}\n\tTelefone: {restaurant[3]}\n\tTempo médio para um entrega: {restaurant[4]}\n')
             
-            # Percorre cada item no menu do restaurante.
-            for item in restaurant[-1]:
-                # Imprime os detalhes do item de forma formatada.
-                print(f'\n\t{item[0]} custando R$ {item[1]} ')
+            # Verifica se o restaurante possui itens no menu.
+            if len(restaurant[-1])>0:
+                # Imprime o cabeçalho para a lista de produtos disponíveis do restaurante.
+                print('Produtos Disponiveis: ')
+                
+                # Percorre cada item no menu do restaurante.
+                for item in restaurant[-1]:
+                    # Imprime os detalhes do item de forma formatada.
+                    print(f'\n\t{item[0]} custando R$ {item[1]} ')
+    else:
+        print("\nNão há restaurantes cadastrados no sistema")
 
 ################ user interface #######
 
@@ -320,4 +354,8 @@ def apresentacao_de_informacoes():
             
     return opc
 
-
+"""
+sugestões de novas funções:
+    produto mais caro
+    menor tempo de entrega
+"""
