@@ -1,246 +1,314 @@
-##################### Restaurant func ###############
-def add_restaurant(restaurants:list):
+# Lista de funções relacionadas ao gerenciamento de restaurantes
+
+def add_restaurant(restaurants: list):
     """
-    Recebe uma lista de restaurantes como parâmetro e adiciona um novo restaurante a lista
-    
-    Restaurants: list
-    
-    return: None
-    
+    Função para adicionar um novo restaurante à lista de restaurantes.
+    Recebe a lista de restaurantes e adiciona um novo restaurante.
     """
-    print("\nPreencha as informações do restaurante!\n")
-    name = input("Nome: ")
-    cnpj = input("CNPJ: ")
-    address = input("Endereço: ")
-    phone = input("Telefone: ")
-    time = input("Tempo médio de entrega [Minutos]: ")
+    # Solicitando ao usuário as informações do novo restaurante
+    print('\nPreencha as informações do restaurante!\n')
+    name = input('Nome: ')
+    cnpj = input('CNPJ: ')
+    address = input('Endereço: ')
+    phone = input('Telefone: ')
+    time = input('Tempo médio de entrega [Minutos]: ')
     menu = []
     
-    restaurants.append([name,cnpj,address,phone, time,menu])
+    # Adicionando o novo restaurante à lista
+    restaurants.append([name, cnpj, address, phone, time, menu])
 
-def search_restaurant(restaurants:list):
-    opc = input("\nDeseja acessar por:\n\t1 - Nome do Restaurante\n\t2 - CNPJ do restaurante\n\nSua escolha: ")
+def search_restaurant(restaurants: list):
+    """
+    Função que busca um restaurante pelo nome ou CNPJ.
+    Retorna o índice do restaurante na lista ou -1 se não for encontrado.
+    """
+    # Opções para o usuário escolher como quer buscar o restaurante
+    opc = input('\nDeseja acessar por:\n\t1 - Nome do Restaurante\n\t2 - CNPJ do restaurante\n\nSua escolha: ')
     key = ''
-    id = -1
+
+    # Obtendo a chave de pesquisa (nome ou CNPJ) com base na escolha do usuário
     if opc == '1':
-        key = input("Nome do restaurante: ")
+        key = input('Nome do restaurante: ')
     elif opc == '2':
-        key = input("CNPJ do restaurante: ")
+        key = input('CNPJ do restaurante: ')
     
+    # Continuando a busca do restaurante, a função retorna o índice do restaurante
+    # ou -1 se não encontrá-lo na lista
     for restaurant in restaurants:
         id += 1
         if restaurant[int(opc)-1] == key:
             break
         
     return id
-            
         
-def modify_restaurant(restaurants:list):
-    
+def modify_restaurant(restaurants: list):
+    """
+    Função para modificar informações de um restaurante existente.
+    O usuário pode escolher qual campo deseja alterar.
+    """
+    # Procurando o restaurante a ser modificado
     id = search_restaurant(restaurants)
     
+    # Se o restaurante for encontrado
     if id != -1:
-        opc = input("\nQual campo deseja alterar?\n\t1 - Nome\n\t2 - CNPJ\n\t3 - Endereço\n\t4 - Telefone\n\t5 - Tempo médio de entrega\n\nSua escolha: ")
+        # Solicitando ao usuário qual campo deseja modificar
+        opc = input('\nQual campo deseja alterar?\n\t1 - Nome\n\t2 - CNPJ\n\t3 - Endereço\n\t4 - Telefone\n\t5 - Tempo médio de entrega\n\nSua escolha: ')
         
+        # Verificando se a opção inserida é um número e está no intervalo correto
         if opc.isnumeric():
             opc = int(opc)
             
             if opc > 0 and opc < 6:
-                data = input("\nInfome o novo valor para o respectivo campo: ")
+                # Solicitando ao usuário o novo valor para o campo escolhido
+                data = input('\nInfome o novo valor para o respectivo campo: ')
                 restaurants[id][opc-1] = data
 
-def remove_restaurant(restaurants:list):
+def remove_restaurant(restaurants: list):
+    """
+    Função para remover um restaurante da lista.
+    """
+    # Procurando o restaurante a ser removido
     id = search_restaurant(restaurants)
     
+    # Se o restaurante for encontrado, removendo-o da lista
     if id != -1:
         del restaurants[id]
         
 
 def show_menu(restaurants):
+    """
+    Função para exibir o menu de um restaurante.
+    """
+    # Procurando o restaurante cujo menu será exibido
     id = search_restaurant(restaurants)
     
+    # Se o restaurante for encontrado, imprimindo seu menu
     if id != -1:
-        for iten in restaurants[id][-1]:
-            print(iten)
+        for item in restaurants[id][-1]:
+            print(item)
     
 #################### Menu func ##############
 
-def add_item(restaurants:list):
+def add_item(restaurants: list):
+    """
+    Função para adicionar um novo item ao menu de um restaurante.
+    """
+    # Procurando o restaurante ao qual o item será adicionado
     id = search_restaurant(restaurants)
-
     
+    # Se o restaurante for encontrado
     if id != -1:
-        print("\nInforme os dados do item:")
-        name = input("Nome: ")
-        valor = input("Preço: ")
+        # Solicitando ao usuário as informações do novo item
+        print('\nInforme os dados do item: ')
+        name = input('Nome: ')
+        valor = input('Preço: ')
         
+        # Adicionando o novo item ao menu do restaurante
         restaurants[id][-1].append([name, valor])
-        
-def search_item(restaurants:list, id: int):
+
+def search_item(restaurants: list, id: int):
     """
-    Recebe Id do restaurante
-    """
-    cont = 0
-    idx = -1
+    Função para pesquisar um item no menu de um restaurante específico.
     
+    :param restaurants: Lista de todos os restaurantes.
+    :param id: Índice do restaurante em que se deseja buscar o item.
+    
+    :return: Retorna o índice do item encontrado ou -1 se não encontrar.
+    """
+    cont = 0  # Inicializando um contador.
+    idx = -1  # Inicializando o índice de retorno com -1 (item não encontrado).
+    
+    # Verifica se o ID fornecido é válido
     if id != -1:
-        name = input("\nNome do produto: ")
+        # Solicita ao usuário o nome do produto que deseja buscar
+        name = input('\nNome do produto: ')
         
+        # Procura o produto no menu do restaurante especificado
         for item in restaurants[id][-1]:
             if item[0] == name:
-                idx = cont
+                idx = cont  # Atribui o valor do contador ao índice de retorno
                 break
-            cont +=1
+            cont += 1  # Incrementa o contador
             
     return idx
 
-def edit_item(restaurants:list, id: int):
-
+def edit_item(restaurants: list, id: int):
+    """
+    Função para editar informações de um item em um restaurante específico.
+    
+    :param restaurants: Lista de todos os restaurantes.
+    :param id: Índice do restaurante cujo item será editado.
+    """
+    # Procura o índice do item que será editado
     idx = search_item(restaurants, id)
+    
+    # Se o item for encontrado
     if idx != -1:
-        opc = input("\nQual Campo deseja alterar?\n\t1 - Nome\n\t2 - Preço\n\nSua escolha: ")
+        # Solicita ao usuário qual campo do item deseja alterar
+        opc = input('\nQual campo deseja alterar?\n\t1 - Nome\n\t2 - Preço\n\nSua escolha: ')
         
+        # Verifica se a entrada é numérica e se está no intervalo correto
         if opc.isnumeric():
             opc = int(opc)
             if opc > 0  and opc < 3:
-                data = input("\nInfome o novo valor para o respectivo campo: ")
+                # Solicita ao usuário o novo valor para o campo escolhido
+                data = input('\nInfome o novo valor para o respectivo campo: ')
+                # Atualiza o valor do campo escolhido no item
                 restaurants[id][-1][idx][opc-1] = data
-                
-
-def remove_item(restaurants:list, id: int):
+        
+def remove_item(restaurants: list, id: int):
+    """
+    Função para remover um item do menu de um restaurante específico.
+    
+    :param restaurants: Lista de todos os restaurantes.
+    :param id: Índice do restaurante do qual o item será removido.
+    """
+    # Procura o índice do item que será removido
     idx = search_item(restaurants, id)
+    
+    # Se o item for encontrado, remove-o da lista
     if idx != -1:
         del restaurants[id][-1][idx]
 
 ################## show info ################
 
-def show_list_restaurant(restaurants:list):
-    print("\nRestaurantes Cadastrados: ")
+def show_list_restaurant(restaurants: list):
+    """
+    Exibe uma lista de restaurantes cadastrados.
+    
+    Args:
+    restaurants (list): Lista contendo informações sobre cada restaurante.
+    """
+    # Imprime o cabeçalho para a lista de restaurantes cadastrados.
+    print('\nRestaurantes Cadastrados: ')
+    
+    # Percorre cada restaurante na lista fornecida.
     for restaurant in restaurants:
-        print(f"\n\tNome: {restaurant[0]}\n\tCNPJ: {restaurant[1]}\n\tEndereço: {restaurant[2]}\n\tTelefone: {restaurant[3]}\n\tTempo médio para um entrega: {restaurant[4]}")
+        # Imprime os detalhes do restaurante de forma formatada.
+        print(f'\n\tNome: {restaurant[0]}\n\tCNPJ: {restaurant[1]}\n\tEndereço: {restaurant[2]}\n\tTelefone: {restaurant[3]}\n\tTempo médio para um entrega: {restaurant[4]}')
 
-def show_describ_all_restaurant(restaurants:list):
-    print("\nRestaurantes Cadastrados: ")
+def show_describ_all_restaurant(restaurants: list):
+    """
+    Exibe uma descrição detalhada de cada restaurante cadastrado, incluindo os itens do menu.
+    
+    Args:
+    restaurants (list): Lista contendo informações sobre cada restaurante.
+    """
+    # Imprime o cabeçalho para a lista de restaurantes cadastrados.
+    print('\nRestaurantes Cadastrados: ')
+    
+    # Percorre cada restaurante na lista fornecida.
     for restaurant in restaurants:
-        print(f"\n\tNome: {restaurant[0]}\n\tCNPJ: {restaurant[1]}\n\tEndereço: {restaurant[2]}\n\tTelefone: {restaurant[3]}\n\tTempo médio para um entrega: {restaurant[4]}\n")
+        # Imprime os detalhes do restaurante de forma formatada.
+        print(f'\n\tNome: {restaurant[0]}\n\tCNPJ: {restaurant[1]}\n\tEndereço: {restaurant[2]}\n\tTelefone: {restaurant[3]}\n\tTempo médio para um entrega: {restaurant[4]}\n')
+        
+        # Verifica se o restaurante possui itens no menu.
         if len(restaurant[-1])>0:
-            print("Produtos Disponiveis: ")
+            # Imprime o cabeçalho para a lista de produtos disponíveis do restaurante.
+            print('Produtos Disponiveis: ')
+            
+            # Percorre cada item no menu do restaurante.
             for item in restaurant[-1]:
-                print(f"\n\t{item[0]} custando R$ {item[1]} ")
+                # Imprime os detalhes do item de forma formatada.
+                print(f'\n\t{item[0]} custando R$ {item[1]} ')
 
 ################ user interface #######
 
-#0
-def interface():  # funcao para a tela inicial do programa
-    
-    print(("""
+# Função principal da interface do programa
+def interface():  
+    # Exibe as opções da tela inicial
+    print(('''
     1 - Gestão de restaurantes
     2 - Gestão de cardápio
     3 - Visualizar informações (Restaurantes e cardápios)
     0 - Encerrar programa
-    """))
+    '''))
 
-    opc = input("\nOpção desejada: ") # chama a função de múltipla escolha
+    # Solicita que o usuário insira a opção desejada
+    opc = input('\nOpção desejada: ')
 
-    if opc == '1': # compara a opção escolhida e seleciona a respectiva função
+    # Verifica qual a opção escolhida pelo usuário e redireciona para a função correspondente
+    if opc == '1':
         opc = gestao_restaurantes() 
-
     elif opc == '2':
         opc = gestao_cardapios()
-
     elif opc == '3':
         opc = apresentacao_de_informacoes()
-
-    elif opc == '0':  # opcao 4 encerra o programa, sempre que for voltar , recebe 4, se for encerrar recebe 0
+    elif opc == '0':
         opc = '0'
-        
     else:
         opc = '-1'
         
     return opc
 
-#1
+# Função que exibe o menu de gerenciamento dos restaurantes
 def gestao_restaurantes(): 
-    """Função menu de gerenciamento dos restaurantes"""
-    print(("""
+    print(('''
     1 - Adicionar restaurante
     2 - Editar restaurante
     3 - Remover restaurante
     4 - Voltar para a tela inicial
-    """))
+    '''))
      
-    opc = input("\nOpção desejada: ")
-        
-    if opc == '1': # cada opçao escolhida encaminha para a respectiva funcao a ser criada
-            opc =  '11'
+    opc = input('\nOpção desejada: ')
 
+    # Redireciona o usuário com base na sua escolha
+    if opc == '1':
+        opc =  '11'
     elif opc == '2':
-            opc =  '12'
-        
+        opc =  '12'
     elif opc == '3':
-            opc = '13'
-
-    elif opc == '4':  # opcao 4 volta pro menu incial
-            opc = '4'
+        opc = '13'
+    elif opc == '4':
+        opc = '4'
     else:
         opc = '-1'
         
     return opc
     
-#2
+# Função que exibe o menu de gerenciamento do cardápio
 def gestao_cardapios():    
-    print(("""
+    print(('''
     1 - Adicionar item ao cardápio
     2 - Editar item do cardápio
     3 - Remover item do cardápio
     4 - Voltar para a tela inicial
-    """))
+    '''))
     
-    opc = input("\nOpção desejada: ")
-        
-    if opc == '1': # cada opçao escolhida encaminha para a respectiva funcao a ser criada
-            opc = '21'
-        
-    elif opc == '2':
-            opc = '22'
-        
-    elif opc == '3':
-            opc = '23'
+    opc = input('\nOpção desejada: ')
 
-    elif opc == '4':  # opcao 4 voltar a primeira tela
+    # Redireciona o usuário com base na sua escolha
+    if opc == '1':
+        opc = '21'
+    elif opc == '2':
+        opc = '22'
+    elif opc == '3':
+        opc = '23'
+    elif opc == '4':
         opc = '4'
-    
     else:
         opc = '-1'
         
     return opc
-#3
-def apresentacao_de_informacoes():
 
-    print(("""
+# Função que exibe as opções para visualização de informações dos restaurantes
+def apresentacao_de_informacoes():
+    print(('''
     1 - Exibir lista de restaurantes
     2 - Exibir detalhadamente cada restaurante
     3 - Voltar para a tela inicial
-    """))
+    '''))
     
-    opc = input("\nOpção desejada: ")
-        
-    if opc == '1': # cada opçao escolhida encaminha para a respectiva funcao a ser criada
-            opc = '31'
-    elif opc == '2': # cada opçao escolhida encaminha para a respectiva funcao a ser criada
-            opc = '32'
+    opc = input('\nOpção desejada: ')
 
+    # Redireciona o usuário com base na sua escolha
+    if opc == '1':
+        opc = '31'
+    elif opc == '2':
+        opc = '32'
     elif opc == '3':
-            opc = '4'
+        opc = '4'
             
     return opc
 
-"""
-Sugestões de novas funcionalidades:
-    Procurar o produto mais barato e seu respectivo restaurante
-    Procurar o restaurante com o menor tempo de entrega
-    Organizar os produtos em categorias:
-        Comida
-        Bebida
 
-"""
