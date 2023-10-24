@@ -1,12 +1,14 @@
 # Lista de funções relacionadas ao gerenciamento de restaurantes
 
-def add_restaurant(restaurants: list):
+def add_restaurant(restaurants:list):
     """
     Função para adicionar um novo restaurante à lista de restaurantes.
     Recebe a lista de restaurantes e adiciona um novo restaurante.
     
-    parametros:
-        restaurants: lista onde os restaraurantes serão armazenados
+    Parâmetros:
+        restaurants::list: lista onde os restaraurantes serão armazenados
+    return:
+        None
     """
     # Solicitando ao usuário as informações do novo restaurante
     print('\nPreencha as informações do restaurante!\n')
@@ -20,24 +22,25 @@ def add_restaurant(restaurants: list):
     # Adicionando o novo restaurante à lista
     restaurants.append([name, cnpj, address, phone, time, menu])
 
-def search_restaurant(restaurants: list):
+def search_restaurant(restaurants:list):
     """
     Função que busca um restaurante pelo nome ou CNPJ.
     
     Parâmetros:
-        restaurants: lista de restaurantes
+        restaurants::list: lista de restaurantes
     Retorna:
-        o índice do restaurante na lista ou -1 se não for encontrado.
+        id: int (o índice do restaurante na lista ou -1 se não for encontrado.)
     """
     # Opções para o usuário escolher como quer buscar o restaurante
     opc = input('\nDeseja acessar por:\n\t1 - Nome do Restaurante\n\t2 - CNPJ do restaurante\n\nSua escolha: ')
     key = ''
+    id = -1
 
     # Obtendo a chave de pesquisa (nome ou CNPJ) com base na escolha do usuário
     if opc == '1':
         key = input('Nome do restaurante: ').upper()
     elif opc == '2':
-        key = input('CNPJ do restaurante: ').upper()
+        key = input('CNPJ do restaurante: ')
     
     # Continuando a busca do restaurante, a função retorna o índice do restaurante
     # ou -1 se não encontrá-lo na lista
@@ -48,10 +51,15 @@ def search_restaurant(restaurants: list):
         
     return id
         
-def modify_restaurant(restaurants: list):
+def modify_restaurant(restaurants:list):
     """
     Função para modificar informações de um restaurante existente.
     O usuário pode escolher qual campo deseja alterar.
+    
+    Parâmetros:
+        restaurants::list: lista de restaurantes
+    return:
+        None
     """
     # Procurando o restaurante a ser modificado
     id = search_restaurant(restaurants)
@@ -78,9 +86,13 @@ def modify_restaurant(restaurants: list):
     else:
         print("\nRestaurante não encontrado!")
 
-def remove_restaurant(restaurants: list):
+def remove_restaurant(restaurants:list):
     """
     Função para remover um restaurante da lista.
+    Parâmetros:
+        restaurants::list: lista de restaurantes
+    return:
+        None
     """
     # Procurando o restaurante a ser removido
     id = search_restaurant(restaurants)
@@ -92,9 +104,13 @@ def remove_restaurant(restaurants: list):
     else:
         print("\nRestaurante não encontrado!")
 
-def show_menu(restaurants):
+def show_menu(restaurants:list):
     """
     Função para exibir o menu de um restaurante.
+    Parâmetros:
+        restaurants::list: lista de restaurantes
+    return:
+        None
     """
     # Procurando o restaurante cujo menu será exibido
     id = search_restaurant(restaurants)
@@ -109,9 +125,14 @@ def show_menu(restaurants):
     
 #################### Menu func ##############
 
-def add_item(restaurants: list):
+def add_item(restaurants:list):
     """
     Função para adicionar um novo item ao menu de um restaurante.
+    Parâmetros:
+        restaurants::list: lista de restaurantes
+    
+    return:
+        None
     """
     # Procurando o restaurante ao qual o item será adicionado
     id = search_restaurant(restaurants)
@@ -134,11 +155,11 @@ def search_item(restaurants: list, id: int):
     Função para pesquisar um item no menu de um restaurante específico.
     
     Parâmetros:
-        restaurants: Lista de todos os restaurantes.
-        id: Índice do restaurante em que se deseja buscar o item.
+        restaurants::list: Lista de todos os restaurantes.
+        id:int: Índice do restaurante em que se deseja buscar o item.
     
     return: 
-        idx: índice do item encontrado ou -1 se não encontrar.
+        idx::int: índice do item encontrado ou -1 se não encontrar.
     """
     cont = 0  # Inicializando um contador.
     idx = -1  # Inicializando o índice de retorno com -1 (item não encontrado).
@@ -163,8 +184,12 @@ def edit_item(restaurants: list, id: int):
     """
     Função para editar informações de um item em um restaurante específico.
     
-    :param restaurants: Lista de todos os restaurantes.
-    :param id: Índice do restaurante cujo item será editado.
+    Parâmetros:
+        restaurants::list: lista de restaurantes
+        id::int: identificação do restaurante, sendo ela a posição que o mesmo se encontra na lista
+    
+    return:
+        None
     """
     # Procura o índice do item que será editado
     idx = search_item(restaurants, id)
@@ -194,8 +219,13 @@ def remove_item(restaurants: list, id: int):
     """
     Função para remover um item do menu de um restaurante específico.
     
-    :param restaurants: Lista de todos os restaurantes.
-    :param id: Índice do restaurante do qual o item será removido.
+    Parâmetros:
+        restaurants::list: lista de restaurantes
+        id::int: indice do item que se deseja remover
+    
+    return:
+        None
+    
     """
     # Procura o índice do item que será removido
     idx = search_item(restaurants, id)
@@ -209,12 +239,16 @@ def remove_item(restaurants: list, id: int):
 
 ################## show info ################
 
-def show_list_restaurant(restaurants: list):
+def show_list_restaurant(restaurants:list):
     """
     Exibe uma lista de restaurantes cadastrados.
     
-    Args:
-    restaurants (list): Lista contendo informações sobre cada restaurante.
+    Parâmetros:
+        restaurants::list: lista de restaurantes
+        
+    return:
+        None
+    
     """
     if len(restaurants) > 0:
         # Imprime o cabeçalho para a lista de restaurantes cadastrados.
@@ -231,8 +265,11 @@ def show_describ_all_restaurant(restaurants: list):
     """
     Exibe uma descrição detalhada de cada restaurante cadastrado, incluindo os itens do menu.
     
-    Args:
-    restaurants (list): Lista contendo informações sobre cada restaurante.
+    Parâmetros:
+        restaurants::list: lista de restaurantes
+        
+    return:
+        None
     """
     if len(restaurants) > 0:
         # Imprime o cabeçalho para a lista de restaurantes cadastrados.
@@ -258,7 +295,16 @@ def show_describ_all_restaurant(restaurants: list):
 ################ user interface #######
 
 # Função principal da interface do programa
-def interface():  
+def interface():
+    """
+    Função responsavel por interagir com o usuário e descobrir o que ele deseja fazer.
+    A mesma aciona outros submenus para mostrar opções para o usuário
+    
+    Parâmetros:
+        None
+    Retorna:
+        opc::int: identificação da operação que será realizada
+    """  
     # Exibe as opções da tela inicial
     print(('''
     1 - Gestão de restaurantes
@@ -285,7 +331,16 @@ def interface():
     return opc
 
 # Função que exibe o menu de gerenciamento dos restaurantes
-def gestao_restaurantes(): 
+def gestao_restaurantes():
+    """
+    Função responsavel por interagir com o usuário e descobrir o que ele deseja fazer.
+
+    
+    Parâmetros:
+        None
+    Retorna:
+        opc::int: identificação da operação que será realizada
+    """  
     print(('''
     1 - Adicionar restaurante
     2 - Editar restaurante
@@ -310,7 +365,15 @@ def gestao_restaurantes():
     return opc
     
 # Função que exibe o menu de gerenciamento do cardápio
-def gestao_cardapios():    
+def gestao_cardapios():   
+    """
+    Função responsavel por interagir com o usuário e descobrir o que ele deseja fazer.
+
+    Parâmetros:
+        None
+    Retorna:
+        opc::int: identificação da operação que será realizada
+    """ 
     print(('''
     1 - Adicionar item ao cardápio
     2 - Editar item do cardápio
@@ -336,6 +399,14 @@ def gestao_cardapios():
 
 # Função que exibe as opções para visualização de informações dos restaurantes
 def apresentacao_de_informacoes():
+    """
+    Função responsavel por interagir com o usuário e descobrir o que ele deseja fazer.
+
+    Parâmetros:
+        None
+    Retorna:
+        opc::int: identificação da operação que será realizada
+    """
     print(('''
     1 - Exibir lista de restaurantes
     2 - Exibir detalhadamente cada restaurante
