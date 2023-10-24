@@ -21,6 +21,7 @@ def add_restaurant(restaurants:list):
     
     # Adicionando o novo restaurante à lista
     restaurants.append([name, cnpj, address, phone, time, menu])
+    print("Restaurante adicionado com sucesso!")
 
 def search_restaurant(restaurants:list):
     """
@@ -146,6 +147,7 @@ def add_item(restaurants:list):
         
         # Adicionando o novo item ao menu do restaurante
         restaurants[id][-1].append([name, valor])
+        print("Item adicionado ao cardápio!")
 
     else:
         print("\nRestaurante não encontrado!")
@@ -286,7 +288,8 @@ def show_describ_all_restaurant(restaurants: list):
                 # Percorre cada item no menu do restaurante.
                 for item in restaurant[-1]:
                     # Imprime os detalhes do item de forma formatada.
-                    print(f'\n\t{item[0]} custando R$ {item[1]} ')
+                    #print(f'\n\t{item[0]} | R${item[1]} ')
+                    print(f'\n\t| {item[0]} | R${item[1]},00 |')
             else:
                 print("\nNão há itens disponiveis no cardapio ainda!")
     else:
