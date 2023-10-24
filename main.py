@@ -1,9 +1,10 @@
+# Importando todas as funções do módulo func.
+from func import *
+
 # Lista que armazena os restaurantes.
 restaurants = []
 # Estrutura da lista: [[nome, cnpj, endereço, telefone, tempo de entrega, [[produto1, preço1], [produto2, preço2], ...]]]
 
-# Importando todas as funções do módulo func.
-from func import *
 
 # Inicializando variáveis.
 opc = '' # Opção selecionada pelo usuário.
