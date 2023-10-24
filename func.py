@@ -47,7 +47,7 @@ def search_restaurant(restaurants:list):
     for restaurant in restaurants:
         id += 1
         if restaurant[int(opc)-1] == key:
-            break
+            return id
         
     return id
         
@@ -173,11 +173,9 @@ def search_item(restaurants: list, id: int):
         for item in restaurants[id][-1]:
             if item[0] == name:
                 idx = cont  # Atribui o valor do contador ao índice de retorno
-                break
+                return idx
             cont += 1  # Incrementa o contador
-    
-    
-            
+         
     return idx
 
 def edit_item(restaurants: list, id: int):
@@ -289,6 +287,8 @@ def show_describ_all_restaurant(restaurants: list):
                 for item in restaurant[-1]:
                     # Imprime os detalhes do item de forma formatada.
                     print(f'\n\t{item[0]} custando R$ {item[1]} ')
+            else:
+                print("\nNão há itens disponiveis no cardapio ainda!")
     else:
         print("\nNão há restaurantes cadastrados no sistema")
 
