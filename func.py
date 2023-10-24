@@ -288,7 +288,6 @@ def show_describ_all_restaurant(restaurants: list):
                 # Percorre cada item no menu do restaurante.
                 for item in restaurant[-1]:
                     # Imprime os detalhes do item de forma formatada.
-                    #print(f'\n\t{item[0]} | R${item[1]} ')
                     print(f'\n\t| {item[0]} | R${item[1]},00 |')
             else:
                 print("\nNão há itens disponiveis no cardapio ainda!")
