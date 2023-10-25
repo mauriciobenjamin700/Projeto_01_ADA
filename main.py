@@ -55,11 +55,18 @@ while opc != '0':
     
     # Caso o usuário escolha exibir a lista de restaurantes.
     elif opc == '31':
-        show_list_restaurant(restaurants)
+        show_list_restaurants(restaurants)
 
     # Caso o usuário escolha exibir detalhes de todos os restaurantes.    
     elif opc == '32':
-        show_describ_all_restaurant(restaurants)
+        show_describ_all_restaurants(restaurants)
+    
+    elif opc == '33':
+        id = low_time(restaurants)
+        if id >= 0:
+            show_restaurant(restaurants[id])
+        else:
+            print("\nAinda não há restaurantes cadastrados no sistema")
 
 # Mensagem exibida ao encerrar o sistema.         
 print('\nSistema encerrado!')
