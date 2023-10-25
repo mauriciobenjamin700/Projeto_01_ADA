@@ -242,6 +242,7 @@ def remove_item(restaurants: list, id: int) -> None:
 def show_restaurant(restaurant:list) -> None:
     print(f'\n\tNome: {restaurant[0]}\n\tCNPJ: {restaurant[1]}\n\tEndereço: {restaurant[2]}\n\tTelefone: {restaurant[3]}\n\tTempo médio para um entrega: {restaurant[4]}')
 
+
 def show_list_restaurants(restaurants:list):
     """
     Exibe uma lista de restaurantes cadastrados.
@@ -345,6 +346,7 @@ def interface() -> int:
     """  
     # Exibe as opções da tela inicial
     print(('''
+                            INICIO
     |-------------------------------------------------------|
     | 1 - Gestão de restaurantes                            |
     | 2 - Gestão de cardápio                                |
@@ -381,10 +383,13 @@ def gestao_restaurantes() -> int:
         opc::int: identificação da operação que será realizada
     """  
     print(('''
-    1 - Adicionar restaurante
-    2 - Editar restaurante
-    3 - Remover restaurante
-    4 - Voltar para a tela inicial
+                    GESTAO DE RESTAURANTES
+    |-------------------------------------------------------|
+    | 1 - Adicionar restaurante                             |
+    | 2 - Editar restaurante                                |
+    | 3 - Remover restaurante                               |
+    | 4 - Voltar para a tela inicial                        |
+    |------------------------------------------------------ |
     '''))
      
     opc = input('\nOpção desejada: ')
@@ -414,11 +419,15 @@ def gestao_cardapios() -> int:
         opc::int: identificação da operação que será realizada
     """ 
     print(('''
-    1 - Adicionar item ao cardápio
-    2 - Editar item do cardápio
-    3 - Remover item do cardápio
-    4 - Voltar para a tela inicial
+                        GESTAO DE CARDAPIO
+    |-------------------------------------------------------|
+    | 1 - Adicionar item ao cardápio                        |
+    | 2 - Editar item do cardápio                           |
+    | 3 - Remover item do cardápio                          |
+    | 4 - Voltar para a tela inicial                        |
+    |------------------------------------------------------ |
     '''))
+    
     
     opc = input('\nOpção desejada: ')
 
@@ -447,10 +456,13 @@ def apresentacao_de_informacoes() -> int:
         opc::int: identificação da operação que será realizada
     """
     print(('''
-    1 - Exibir lista de restaurantes
-    2 - Exibir detalhadamente cada restaurante
-    3 - Exibir o restaurante com o menor tempo de entrega
-    4 - Voltar para a tela inicial
+                    VISUALIZAR INFORMACOES
+    |-------------------------------------------------------|
+    | 1 - Exibir lista de restaurantes                      |
+    | 2 - Exibir detalhadamente cada restaurante            |
+    | 3 - Exibir restaurante com o menor tempo de entrega   |
+    | 4 - Voltar para a tela inicial                        |
+    |------------------------------------------------------ |
     '''))
     
     opc = input('\nOpção desejada: ')
