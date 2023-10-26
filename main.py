@@ -35,9 +35,11 @@ while opc != '0':
 
     # Caso o usuário escolha adicionar um item ao cardápio.    
     elif opc == '21':
-        
-        add_item(restaurants)
-
+        if len(restaurants) > 0:
+            add_item(restaurants)
+        else:
+            print("\nAinda não há restaurantes cadastrados na plataforma")
+    
     # Caso o usuário escolha editar um item do cardápio.    
     elif opc == '22':
         # Busca o ID do restaurante selecionado.
