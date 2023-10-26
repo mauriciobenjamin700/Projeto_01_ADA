@@ -79,7 +79,7 @@ def modify_restaurant(restaurants:list) -> None:
                 # Solicitando ao usuário o novo valor para o campo escolhido
                 data = input('\nInfome o novo valor para o respectivo campo: ')
                 restaurants[id][opc-1] = data
-            
+                print("\nValor atualizado com sucesso!")
             else:
                 print("\nOpção escolhida é invalida!")
         
@@ -102,7 +102,7 @@ def remove_restaurant(restaurants:list) -> None:
     # Se o restaurante for encontrado, removendo-o da lista
     if id != -1:
         del restaurants[id]
-    
+        print("\nRestaurante removido!")
     else:
         print("\nRestaurante não encontrado!")
 
