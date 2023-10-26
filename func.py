@@ -35,6 +35,7 @@ def search_restaurant(restaurants:list) -> int:
     # Opções para o usuário escolher como quer buscar o restaurante
     opc = input('\nDeseja acessar por:\n\t1 - Nome do Restaurante\n\t2 - CNPJ do restaurante\n\nSua escolha: ')
     key = ''
+    cont = 0
     id = -1
 
     # Obtendo a chave de pesquisa (nome ou CNPJ) com base na escolha do usuário
@@ -46,10 +47,10 @@ def search_restaurant(restaurants:list) -> int:
     # Continuando a busca do restaurante, a função retorna o índice do restaurante
     # ou -1 se não encontrá-lo na lista
     for restaurant in restaurants:
-        id += 1
         if restaurant[int(opc)-1] == key:
+            id = cont
             return id
-        
+        cont += 1
     return id
         
 def modify_restaurant(restaurants:list) -> None:
@@ -240,6 +241,7 @@ def remove_item(restaurants: list, id: int) -> None:
 ################## show info ################
 
 def show_restaurant(restaurant:list) -> None:
+
     print(f'\n\tNome: {restaurant[0]}\n\tCNPJ: {restaurant[1]}\n\tEndereço: {restaurant[2]}\n\tTelefone: {restaurant[3]}\n\tTempo médio para um entrega: {restaurant[4]}')
 
 
