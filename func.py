@@ -241,6 +241,16 @@ def remove_item(restaurants: list, id: int) -> None:
 ################## show info ################
 
 def show_restaurant(restaurant:list) -> None:
+    """
+    Exibe os dados de um restaurante.
+    
+    Parâmetros:
+        restaurants::list: lista de restaurantes
+        
+    return:
+        None
+    
+    """
 
     print(f'\n\tNome: {restaurant[0]}\n\tCNPJ: {restaurant[1]}\n\tEndereço: {restaurant[2]}\n\tTelefone: {restaurant[3]}\n\tTempo médio para um entrega: {restaurant[4]}')
 
